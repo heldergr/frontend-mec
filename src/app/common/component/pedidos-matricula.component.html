@@ -1,0 +1,56 @@
+<div class="table-responsive">
+    <table class="table table-sm">
+        <caption>Pedidos de matrícula do estudante selecionado</caption>
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col" *ngIf="exibirAluno">Estudante</th>
+                <th scope="col" *ngIf="exibirFaculdade">Universidade</th>
+                <th scope="col">Curso</th>
+                <th scope="col">Matricula</th>
+                <th scope="col" *ngIf="exibirInstituicaoFinanceira">Instituição Financeira</th>
+                <th scope="col">Status do Pedido</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let pedido of pedidosMatricula">
+                <td>{{pedido.id}}</td>
+                <td *ngIf="exibirAluno">{{pedido.cpf}} - Carlos Roberto da Silva</td>
+                <td *ngIf="exibirFaculdade">{{pedido.opcaoMatricula.universidade}}</td>
+                <td>{{pedido.opcaoMatricula.curso}}</td>
+                <td>{{pedido.opcaoMatricula.mensalidade}}</td>
+                <td *ngIf="exibirInstituicaoFinanceira">{{pedido.instituicaoFinanceira.nome}}</td>
+                <td>{{pedido.status | status}}</td>
+                <td>
+                    <button type="button" class="btn btn-primary btn-sm" (click)="cancelarPedido(pedido)"
+                        *ngIf="exibirCancelar(pedido)"><span class="fas fa-ban"></span> Cancelar</button>
+                    <button type="button" class="btn btn-primary btn-sm" (click)="confirmarPedido(pedido)"
+                        style="margin-left: 5px;" *ngIf="exibirConfirmar(pedido)"><span class="fas fa-check"></span>
+                        Confirmar</button>
+                    <button type="button" class="btn-primary btn-sm" (click)="aprovarFaculdadePedido(pedido)"
+                        style="margin-left: 5px;" *ngIf="exibirAprovarFaculdade(pedido)"><span
+                            class="fas fa-check"></span> Aprovar</button>
+                    <button type="button" class="btn-primary btn-sm" (click)="aprovarIfPedido(pedido)"
+                        style="margin-left: 5px;" *ngIf="exibirAprovarIf(pedido)"><span class="fas fa-check"></span>
+                        Aprovar</button>
+                    <button type="button" class="btn-primary btn-sm" (click)="negarIfPedido(pedido)"
+                        style="margin-left: 5px;" *ngIf="exibirNegarIf(pedido)"><span class="fas fa-ban"></span>
+                        Negar</button>
+
+                    <button type="button" class="btn-primary btn-sm" (click)="anexarFinanciamentoPedido(pedido)"
+                        style="margin-left: 5px;" *ngIf="exibirAnexarContratoFinanciamento(pedido)"><span class="fas fa-check"></span>
+                        Anexar financiamento</button>
+
+                    <button type="button" class="btn-primary btn-sm" (click)="anexarMatriculaPedido(pedido)"
+                        style="margin-left: 5px;" *ngIf="exibirAnexarContratoMatricula(pedido)"><span class="fas fa-check"></span>
+                        Anexar matrícula</button>
+
+                    <button type="button" class="btn-primary btn-sm" (click)="downloadIdentidadePedido(pedido)"
+                        style="margin-left: 5px;" *ngIf="exibirDownloadIdentidade(pedido)"><span class="fas fa-check"></span>
+                        Download Identidade</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
